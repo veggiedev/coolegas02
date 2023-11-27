@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+<title>{% block title %}Coolegas{% endblock %}</title>
+{% block content %}
+
+<h1 class="mb-6 m-5 text-center text-3xl text-green-800"><strong>Coolegas</strong>, mi página, mis cosas.</h1>
+
+
+
+<p class="mb-6 m-5 text-center text-2xl" >Nombre Completo: {{ user.first_name }} {{ user.last_name}}</p>
+<p class="mb-6 m-5 text-center text-2xl"> Edad: {% for i in user_info %} {{i.edad}}{% endfor %}</p>
+<p class="mb-6 m-5 text-center text-2xl" >Género: {% for i in user_info %} {{i.genero}}{% endfor %}</p>
+
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+
+
+
+{% endblock %}

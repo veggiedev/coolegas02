@@ -1,0 +1,39 @@
+<!gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'-- templates/index.html -->
+
+{% extends "base.html" %}
+<title>{% block title %}Coolegas{% endblock %}</title>
+{% block content %}
+
+<h1 class="mb-6 m-5 text-center text-3xl text-green-800"><strong>Coolegas</strong>, donde encontraras tus nuevos amigos!</h1>
+<div class="text-center m-10 max-w-full bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+    </a>
+    <div class="p-8">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Buscas amig@s con los que realizar las actividades que te apasionan?</h5>
+        </a>
+        <p class="my-5 font-normal text-gray-700 dark:text-gray-400">
+            En <strong>Coolegas</strong> encontraras gente de tu rollo, con los que hacer las cosas que te gustan,
+            amig@s de un dia, o para toda la vida, TÚ ELIGES!</p>
+        <div class="">
+                {% if user.is_authenticated %}
+        {% else %}
+        <p class="text-white my-5">No estas logeado.</p>
+
+            <a href="{% url 'registro' %}"
+                class="my-5 inline-flex items-center px-3 py-2 text-xl font-light text-center
+                text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4
+                focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700
+                dark:focus:ring-green-800">
+                Registro
+            </a>
+
+                        <a href="{% url 'login' %}"><p class="text-green-700 text-xl mb-3 font-normal inline-flex">Entrar</p></a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+
+{% endblock content %}
