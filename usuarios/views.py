@@ -23,12 +23,6 @@ def registro(request):
             }
     return render(request, "perfil.html", context)
 
-def perfil(request):
-    form = UserCreation()
-    context = {
-            'form':form
-            }
-    return render(request, "perfil.html", context)
 
 def mi_pagina(request):
     user = request.user

@@ -18,7 +18,7 @@ def actividades(request):
 def logout(request):
     return render(request, "login.html", {"form":form})
 
-def mis_actividades(request):
+def perfil(request):
     if request.method == "POST":
         form = ActividadesForm(request.POST)
         if form.is_valid():
@@ -27,7 +27,7 @@ def mis_actividades(request):
         form = ActividadesForm()
     user = request.user
     lista_actividades = Actividades.objects.filter(participantes__username=user.username)
-    return render(request, 'mis_actividades.html', {"form": form, "lista_actividades": lista_actividades})
+    return render(request, 'perfil.html', {"form": form, "lista_actividades": lista_actividades})
 
 def edit_act(request, id):
     if request.user.is_authenticated:
