@@ -1,5 +1,5 @@
 from django import forms
-from .models import Actividades
+from .models import Actividades, Friendship
 from django.forms.forms import Form
 from django.contrib.auth.models import User
 
@@ -23,4 +23,11 @@ class ActividadesForm(forms.ModelForm):
     #fecha = forms.DateField(label='Fecha de Actividad',widget=forms.TextInput(attrs={'placeholder': 'Fecha de Actividad', 'style': 'width: 300px;', 'class': 'form-control'}))
     duracion = forms.IntegerField(label='Duracion de Actividad',widget=forms.TextInput(attrs={'placeholder': 'Duracion de Actividad', 'style':'width: 80%; display: inline-block; max-width: 600px;', 'class': 'form-control'}))
 
-
+class FriendshipForm(forms.ModelForm):
+    class Meta:
+        model = Friendship
+        fields = ("amigo",)
+    amigo = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
+                                           label="Amigos",
+                                           widget=forms.CheckboxSelectMultiple)
+    creator_id = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label="Creador")
