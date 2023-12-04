@@ -11,6 +11,6 @@ class Actividades(models.Model):
         return self.nombre
 
 class Friendship(models.Model):
-    friends = models.ManyToManyField(User, blank=True, null=True)
+    friends = models.ManyToManyField(User, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     creator_id = models.ForeignKey(User, related_name="Creador", on_delete=models.CASCADE)

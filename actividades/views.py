@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Actividades
+from .models import Actividades, Friendship
 from .forms import ActividadesForm, FriendshipForm
 
 # Create your views here.
@@ -21,18 +21,12 @@ def logout(request):
 def perfil(request):
     if request.method == "POST":
         form = ActividadesForm(request.POST)
-        friend_form = FriendshipForm(request.POST)
         if form.is_valid():
             form.save()
-        else:
-            if friend_form.is_valid():
-                friend_form.save()
-    else:
-        form = ActividadesForm()
-        friend_form = FriendshipForm(request.POST)
+    form = ActividadesForm()
     user = request.user
     lista_actividades = Actividades.objects.filter(participantes__username=user.username)
-    return render(request, 'perfil.html', {"form": form, "friend_form" : friend_form, "lista_actividades": lista_actividades})
+    return render(request, 'perfil.html', {"form": form, "lista_actividades": lista_actividades})
 
 def edit_act(request, id):
     if request.user.is_authenticated:
@@ -48,3 +42,19 @@ def edit_act(request, id):
         else:
             form = ActividadesForm(instance=actividad)
         return render(request, 'edit_actividad.html', {'form':form})
+
+def amistades(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if request.method == "POST":
+            friend_form = FriendshipForm(request.POST)
+            if friend_form.is_valid():
+                friend_form.save()
+            friend_form = FriendshipForm()
+            lista_amigos = Friendship.objects.filter(creator_id__username=user.username)
+            return render(request, 'amistades.html', {"friend_form" : friend_form, "lista_amigos" : lista_amigos})
+
+        friend_form = FriendshipForm()
+        lista_amigos = Friendship.objects.filter(creator_id__username=user.username)
+        return render(request, 'amistades.html', {"friend_form" : friend_form, "lista_amigos" : lista_amigos})
+
