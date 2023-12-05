@@ -21,7 +21,7 @@ def registro(request):
     context = {
             'form':form
             }
-    return render(request, "perfil.html", context)
+    return render(request, "registro.html", context)
 
 
 def mi_pagina(request):

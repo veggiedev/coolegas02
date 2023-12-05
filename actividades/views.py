@@ -50,11 +50,7 @@ def amistades(request):
             friend_form = FriendshipForm(request.POST)
             if friend_form.is_valid():
                 friend_form.save()
+        else:
             friend_form = FriendshipForm()
-            lista_amigos = Friendship.objects.filter(creator_id__username=user.username)
-            return render(request, 'amistades.html', {"friend_form" : friend_form, "lista_amigos" : lista_amigos})
-
-        friend_form = FriendshipForm()
-        lista_amigos = Friendship.objects.filter(creator_id__username=user.username)
-        return render(request, 'amistades.html', {"friend_form" : friend_form, "lista_amigos" : lista_amigos})
+        return render(request, 'amistades.html', {"friend_form" : friend_form,})
 

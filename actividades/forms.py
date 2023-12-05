@@ -26,8 +26,9 @@ class ActividadesForm(forms.ModelForm):
 class FriendshipForm(forms.ModelForm):
     class Meta:
         model = Friendship
-        fields = ("amigo",)
-    amigo = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
+        fields = ("friends", "creator_id",)
+    friends = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
                                            label="Amigos",
                                            widget=forms.CheckboxSelectMultiple)
-    creator_id = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label="Creador")
+    creator_id = forms.CharField()
+
