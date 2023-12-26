@@ -26,13 +26,14 @@
     <div class="object-center text-center">
         <form method="post" class="my-10">
              {% csrf_token %}
-             <div class="sm:my-10">{{ form.username | as_crispy_field }}</div>
              <div class="sm:my-10">{{ form.first_name | as_crispy_field }}</div>
              <div class="sm:my-10">{{ form.last_name | as_crispy_field }}</div>
              <div class="sm:my-10">{{ form.email | as_crispy_field }}</div>
              <div class="sm:my-10">{{ form.password1 | as_crispy_field }}</div>
              <div class="sm:my-10">{{ form.password2 | as_crispy_field }}</div>
-                    <button class="inline-flex items-center px-3 py-2 text-lg font-thin text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit" name="submit" value="Register">Submitir<button/>
+             <div class="sm:my-10 max-w-md align-middle">{{ form.genero | as_crispy_field }}</div>
+             <div class="sm:my-10">{{ form.edad | as_crispy_field }}</div>
+                    <button class="inline-flex items-center px-3 py-2 text-lg font-light text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit" name="submit" value="Register">Submitir<button/>
          </form>
     <script src="https://cdn.tailwindcss.com"></script>
     </div>

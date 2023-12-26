@@ -32,7 +32,7 @@
                 <form method="POST" class="form my-10">
                     {% csrf_token %}
 		    {% for friend in friend_form.friends %}
-		    	{% if friend|striptags|slice:"2:" != user.username %}
+		    	{% if friend|striptags|slice:"2:" != user.email %}
 			<div class="checkbox">{{ friend }}</div>
 			{% endif %}
 		    {% endfor %}

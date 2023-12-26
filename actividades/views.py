@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from .models import Actividades, Friendship, User
+from .models import Actividades, Friendship
 from .forms import ActividadesForm, FriendshipForm
+from django.views.generic import TemplateView
 
 # Create your views here.
 
-def index(request):
-    return render(request, "index.html")
+class HomePageView(TemplateView):
+    template_name = 'index.html'
 
 def base(request):
     return render(request, "base.html")
@@ -15,14 +16,12 @@ def actividades(request):
     context = {"lista_actividades": lista_actividades,}
 
     return render(request, "actividades.html", context)
-def logout(request):
-    return render(request, "login.html", {"form":form})
 
 def perfil(request):
     form = ActividadesForm()
     friend_form = FriendshipForm()
     user = request.user
-    lista_actividades = Actividades.objects.filter(participantes__username=user.username)
+    lista_actividades = Actividades.objects.filter(participantes__email=user.email)
     if request.method == "POST":
         if "create_activity" in request.POST:
             form = ActividadesForm(request.POST)
@@ -35,7 +34,7 @@ def perfil(request):
             else:
                 print("ERROR : Form is invalid")
     else:
-        lista_actividades = Actividades.objects.filter(participantes__username=user.username)
+        lista_actividades = Actividades.objects.filter(participantes__email=user.email)
     return render(request, 'perfil.html', {"form" : form, "friend_form": friend_form, "lista_actividades": lista_actividades})
 
 def edit_act(request, id):
@@ -46,7 +45,7 @@ def edit_act(request, id):
             if form.is_valid():
                 form.save()
                 user = request.user
-                lista_actividades = Actividades.objects.filter(participantes__username=user.username)
+                lista_actividades = Actividades.objects.filter(participantes__email=user.email)
                 return render(request, 'mis_actividades.html', {"form": form, "lista_actividades": lista_actividades})
 
         else:

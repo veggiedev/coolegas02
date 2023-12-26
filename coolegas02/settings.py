@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_tailwind',
     'django_browser_reload',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -63,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'coolegas02.urls'
@@ -92,8 +96,8 @@ WSGI_APPLICATION = 'coolegas02.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django03',
-        'PASSWORD': 'django03',
+        'NAME': 'django',
+        'PASSWORD': 'django',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -131,9 +135,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
@@ -150,5 +154,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/perfil'
-LOGOUT_REDIRECT_URL = 'index'
+AUTH_USER_MODEL = "usuarios.CustomUser"
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
 
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGOUT_REDIRECT_URL ="/accounts/login"
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
