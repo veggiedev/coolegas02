@@ -11,7 +11,7 @@
         <h2 class="text-center mt-24 text-3xl text-green-700">Crea una Actividad</h2>
 
         <div class="text-center w-full sm:text-left sm:grid grid-cols-2 gap-5 align-bottom">
-            <div class="text-center float-left w-full sm:text-left">
+            <div class="text-center float-left w-full dark:text-white sm:text-left">
                 <form method="POST" class="form my-10">
                     {% csrf_token %}
                     {{ form.nombre | as_crispy_field }}

@@ -1,19 +1,19 @@
-<!gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'-- templates/index.html -->
 
 {% extends "base.html" %}
 <title>{% block title %}Coolegas{% endblock %}</title>
-{% block content %}
 
-<h1 class="mb-6 m-5 text-center text-3xl text-green-800"><strong>Coolegas</strong>, donde encontraras tus nuevos amigos!</h1>
-<div class="text-center m-10 max-w-full bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    {% load static %}
+{% block content %}
+<h1 class="mb-6 m-5 text-center text-3xl dark:text-green-700 text-green-800"><strong>Coolegas</strong>, donde encontraras tus nuevos amigos!</h1>
+<div class="text-center m-10 max-w-full bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-200 dark:border-gray-700">
     <a href="#">
         <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
     </a>
     <div class="p-8">
         <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Buscas amig@s con los que realizar las actividades que te apasionan?</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-dark-grey">Buscas amig@s con los que realizar las actividades que te apasionan?</h5>
         </a>
-        <p class="my-5 font-normal text-gray-700 dark:text-gray-400">
+        <p class="my-5 font-normal text-gray-700 dark:text-gray-500">
             En <strong>Coolegas</strong> encontraras gente de tu rollo, con los que hacer las cosas que te gustan,
             amig@s de un dia, o para toda la vida, TÚ ELIGES!</p>
         <div class="">
@@ -34,6 +34,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 {% endblock content %}

@@ -28,3 +28,6 @@ def mi_pagina(request):
     user = request.user
     user_info = Usuario.objects.filter(user=user.id).values()
     return render(request, "mi_pagina.html", {"user_info":user_info})
+
+def amigos(request):
+    return render(request, "amistades.html")
