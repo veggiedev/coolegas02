@@ -8,18 +8,17 @@
 {% block content %}
 
     <body class="mx-5">
-        <h2 class="text-center mt-24 text-3xl text-green-700">Amistades</h2>
+        <h2 class="text-center my-24 text-3xl text-green-700">Buscar Amistades</h2>
 
-                <form method="POST" class="form my-10">
-                    {% csrf_token %}
+                <form action={% url 'search_results' %} method="get" class="flex mx-4">
                     {{ friend_form.friends }}
-
+                    <input name="q" type="text" placeholder=" Buscar nombre usuario o correo" class="flex-1 w-64 border-b border-green-700 dark:rounded">
                     <button type="submit"
-                        class="px-3 py-2 text-sm font-medium text-center text-white
+                        class="flex-none ml-4 w-32 px-3 py-2 text-sm font-medium text-white
                             bg-green-700 rounded-lg hover:bg-green-800
                             focus:ring-4 focus:outline-none focus:ring-green-300
                             dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Guardar
+                       Buscar 
                     <button>
                 </form>
     </body>

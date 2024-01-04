@@ -3,52 +3,36 @@
 <html>
     {% extends 'base.html' %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 {% load crispy_forms_tags %}
     {% block title %} Coolegas - Perfil {% endblock %}
 {% block content %}
 
-    <body class="mx-5">
-        <h2 class="text-center mt-24 text-3xl text-green-700">Crea una Actividad</h2>
-
-        <div class="text-center w-full sm:text-left sm:grid grid-cols-2 gap-5 align-bottom">
-            <div class="text-center float-left w-full dark:text-white sm:text-left">
-                <form method="POST" class="form my-10 dark:colo">
+    <body class="">
+    <div class="lg:grid grid-cols-2 gap-2 mx-4">
+        <div class="">
+            <h2 class="mt-24 text-3xl text-green-700">Crea una Actividad</h2>
+            <div class="dark:text-white sm:text-left">
+                <form method="POST" class="form my-10">
                     {% csrf_token %}
-                    {{ form }}
-                    <!-- {{ form.participantes }} -->
-                    <!-- {{ form.lugar | as_crispy_field }} -->
-                    <!-- {{ form.fecha | as_crispy_field }} -->
-                    <!-- {{ form.duracion | as_crispy_field }} -->
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Participantes*</label>
+                    {{ form.participantes }}
+                    {{ form.nombre | as_crispy_field }}
+                    {{ form.lugar | as_crispy_field }}
+                    {{ form.fecha | as_crispy_field }}
+                    {{ form.duracion | as_crispy_field }}
                     <button type="submit"
                         class="px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300
                         dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Guardar<button>
                 </form>
             </div>
-            <div>
-
-                <form method="POST" class="form my-10">
-                    {% csrf_token %}
-                    {{ friend_form.amigo }}
-
-                    <button type="submit"
-                        class="px-3 py-2 text-sm font-medium text-center text-white
-                            bg-green-700 rounded-lg hover:bg-green-800
-                            focus:ring-4 focus:outline-none focus:ring-green-300
-                            dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Guardar
-                    <button>
-                </form>
-            </div>
         </div>
-
-            <h2 class="text-center mt-24 text-3xl text-green-700">Tus Actividades</h2>
-        <div class="text-center w-full sm:text-left sm:grid grid-cols-2 gap-5">
+        <div class="">
+            <h2 class="mt-24 text-3xl text-green-700">Tus Actividades</h2>
             {% for actividad in lista_actividades %}
                 <div>
                     <br/>
-
                     <img src="https://www.nps.gov/bisc/planyourvisit/images/IMG_2011_03_26_11_38_51_0334.jpg?maxwidth=650&autorotate=false&quality=78&format=webp"
                     class="w-full border-solid border-2 border-green-500 ">
                     <div class="md:float-left max-sm:text-center">
@@ -79,6 +63,7 @@
                 </div>
             {% endfor %}
         </div>
+    </div>
     </body>
 
 <script src="https://cdn.tailwindcss.com"></script>

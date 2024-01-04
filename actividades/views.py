@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import Actividades, Friendship
 from .forms import ActividadesForm, FriendshipForm
-
+# from .views import  SearchResultsView
+from django.views.generic import TemplateView, ListView
+from django.contrib.auth.admin import User
+from django.db.models import Q
 # Create your views here.
 
 def index(request):
@@ -43,14 +46,23 @@ def edit_act(request, id):
             form = ActividadesForm(instance=actividad)
         return render(request, 'edit_actividad.html', {'form':form})
 
-def amistades(request):
-    if request.user.is_authenticated:
-        user = request.user
-        if request.method == "POST":
-            friend_form = FriendshipForm(request.POST)
-            if friend_form.is_valid():
-                friend_form.save()
-        else:
-            friend_form = FriendshipForm()
-        return render(request, 'amistades.html', {"friend_form" : friend_form,})
+# def amistades(request):
+#     if request.user.is_authenticated:
+#         user = request.user
+#         if request.method == "POST":
+#             friend_form = FriendshipForm(request.POST)
+#             if friend_form.is_valid():
+#                 friend_form.save()
+#         else:
+#             friend_form = FriendshipForm()
+#         return render(request, 'amistades.html', {"friend_form" : friend_form,})
+class SearchResultsView(ListView):
+    model = User
+    template_name = "search_results.html"
 
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        object_list = User.objects.filter(
+            Q(username__icontains=query) | Q(email__icontains=query)
+        )
+        return object_list

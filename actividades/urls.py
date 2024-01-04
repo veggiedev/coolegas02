@@ -9,6 +9,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("perfil", views.perfil, name="perfil"),
     path("edit_act/<int:id>", views.edit_act, name="edit_act"),
-    path("amistades", views.amistades, name="amistades"),
+    # path("amistades", views.amistades, name="amistades"),
+    path("search/", views.SearchResultsView.as_view(), name="search_results"),
 ]
 

@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+    {% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+    {% block title %} Coolegas - Amistades {% endblock %}<
+{% block content %}
+    <body>
+            <h2 class="text-center my-24 text-3xl text-green-700">Resultados Búsqueda</h2>
+
+
+        <ul class="mx-4">
+            {% for person in object_list %}
+                <li>
+                    {{ person.username }}
+                </li>
+            {% endfor %}
+        </ul>
+     </body>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% endblock content %}
+
+</html>
+
