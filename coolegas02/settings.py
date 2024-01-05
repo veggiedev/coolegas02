@@ -92,8 +92,8 @@ WSGI_APPLICATION = 'coolegas02.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django',
-        'PASSWORD': 'django',
+        'NAME': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
