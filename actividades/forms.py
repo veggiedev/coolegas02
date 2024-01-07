@@ -13,7 +13,7 @@ class ActividadesForm(forms.ModelForm):
         fields = ("nombre", "participantes", "lugar", "fecha","duracion",)
         widgets = {'fecha':forms.TextInput(attrs={'type':'datetime-local','style': ' border-bottom: solid 1px rgb(21 128 61);display: inline-block;'}),
         }
-    participantes = forms.MultipleChoiceField(label="Participantes",widget=forms.CheckboxSelectMultiple, choices=[(user.username, user) for user in User.objects.all()])
+    participantes = forms.ModelMultipleChoiceField(queryset=User.objects.all(), label="Participantes",widget=forms.CheckboxSelectMultiple)
     nombre = forms.CharField(label='Nombre de Actividad',
                              widget=forms.TextInput(attrs={'placeholder': 'Nombre', 'style':'border-bottom: solid 1px rgb(21 128 61);', 'class': 'form-control'}))
     lugar = forms.CharField(label='Lugar de Actividad', widget=forms.TextInput(attrs={'placeholder': 'Lugar de Actividad', 'style':'border-style: solid; border-bottom: solid 1px rgb(21 128 61);', 'class': 'text'}))
