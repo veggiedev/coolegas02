@@ -3,14 +3,12 @@
 <html>
     {% extends 'base.html' %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'main.css' %}">
 {% load crispy_forms_tags %}
     {% block title %} Coolegas - Perfil {% endblock %}
 {% block content %}
-
-    <body class="">
+<div class="flex flex-col h-screen">
     <div class="lg:grid grid-cols-2 gap-4 mx-4">
-        <div class="">
+        <div>
             <h2 class="mt-24 text-3xl mb-5 text-green-600">Crea una Actividad</h2>
             <div class="dark:text-white sm:text-left">
                 <form method="POST" class="form">
@@ -30,43 +28,75 @@
                 </form>
             </div>
         </div>
+    
         <div>
-        <h2 class="mt-24 text-3xl mb-5 text-green-600">Tus Actividades</h2>
-        <div class="2xl:grid grid-cols-2 gap-4 ">
-            {% for actividad in lista_actividades %}
-                <div>
-                    <img src="https://www.nps.gov/bisc/planyourvisit/images/IMG_2011_03_26_11_38_51_0334.jpg?maxwidth=650&autorotate=false&quality=78&format=webp"
-                    class="w-full 2xl:max-w-lg border-solid border-2 border-green-500 ">
-                    <div class="md:float-left lg:mx-5 dark:text-white xl:max-w-lg ">
-                        <strong>Actividad: </strong>{{ actividad.nombre }}
-                        <br/>
-                        <strong>Participantes:<br/> </strong>
-                        {% for i in actividad.participantes.all %}
-                                {{ i.first_name}} {{ i.last_name }}<br/>
-                        {% endfor %}
+            <h2 class="mt-24 text-3xl mb-5 text-green-600">Tus Actividades</h2>
+            <div class="relative " data-carousel="slide" id="default-carousel">
+                <div class="relative overflow-hidden h-[430]">
+                    {% for actividad in lista_actividades %}
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
 
-                        <strong>Lugar: </strong>{{ actividad.lugar }}
-                        <br/>
-                    </div>
-                    <div class="md:float-left lg:mx-5 dark:text-white xl:max-w-lg">
-                        <strong>Dia: </strong>{{ actividad.fecha.date }}
-                        <br/>
-                        <strong>Hora: </strong>{{ actividad.fecha.time }}
-                        <br/>
-                        <strong>Duracion: </strong>{{ actividad.duracion }} horas
-                        <br/>
-                        <a href="{% url 'edit_act' actividad.id %}">
-                        <button type="submit"
-                        class="px-3 align-bottom py-2 mb-4 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300
-                        dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-green-orange"
-                        >Editar {{ actividad.nombre }}<button></a>
-                    </div>
+                            <img src="https://www.nps.gov/bisc/planyourvisit/images/IMG_2011_03_26_11_38_51_0334.jpg?maxwidth=650&autorotate=false&quality=78&format=webp" class="absolute block rounded-lg w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            <div class="absolute z-30 flex items-center py-5 px-5 justify-between w-full bottom-4 rounded-lg pb-10 bg-opacity-50 bg-white dark:bg-opacity-50 dark:bg-black"> 
+                                <div class="dark:text-white ">
+                                    <strong>Actividad: </strong>{{ actividad.nombre }}
+                                    <br/>
+                                    <strong>Participantes:<br/> </strong>
+                                    {% for i in actividad.participantes.all %}
+                                            {{ i.first_name}} {{ i.last_name }}<br/>
+                                    {% endfor %}
+
+                                    <strong>Lugar: </strong>{{ actividad.lugar }}
+                                    <br/>
+                                </div>
+                                <div class=" items-left dark:text-white">
+                                    <strong>Dia: </strong>{{ actividad.fecha.date }}
+                                    <br/>
+                                    <strong>Hora: </strong>{{ actividad.fecha.time }}
+                                    <br/>
+                                    <strong>Duracion: </strong>{{ actividad.duracion }} horas
+                                    <br/>
+                                    <a href="{% url 'edit_act' actividad.id %}">
+                                    <button type="submit"
+                                    class="px-3 align-bottom py-2 mt-3 mb-1  text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300
+                                    dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-green-orange"
+                                    >Editar {{ actividad.nombre }}<button></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            
+    
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                </div>
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linectheme/ap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
         </div>
     </div>
-    </body>
-
+</div>
 <script src="https://cdn.tailwindcss.com"></script>
 {% endblock content %}
 

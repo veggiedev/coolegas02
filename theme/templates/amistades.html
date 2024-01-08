@@ -7,7 +7,7 @@
     {% block title %} Coolegas - Amistades {% endblock %}<
 {% block content %}
 
-    <body class="mx-5">
+    <div class="mx-5 flex flex-col h-screen">
         <h2 class="text-center my-24 text-3xl text-green-700">Buscar Amistades</h2>
 
                 <form action={% url 'search_results' %} method="get" class="flex mx-4">
@@ -21,7 +21,7 @@
                        Buscar 
                     <button>
                 </form>
-    </body>
+    </div>
 
 <script src="https://cdn.tailwindcss.com"></script>
 {% endblock content %}
