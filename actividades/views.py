@@ -46,11 +46,40 @@ def edit_act(request, id):
 def amistades(request):
     if request.user.is_authenticated:
         user = request.user
+        amistades_enviadas = Friendship.objects.filter(creator_id__username=user.username)  #OBJETOS AMISTAD CREADOS POR MI
+        #print(f"enviadas por mi{[i.friend.username for i in amistades_enviadas]}") #this is okj
+        amistades_recibidas = Friendship.objects.filter(friend__username=user.username) #OBJETOS AMISTAD CREADOS POR OTROS PARA MI
+        #print(f"recibidas{[i.creator_id.username for i in amistades_recibidas]}") #this is okj
+        lista_amistades_reciprocas = []
+        lista_amistades_enviadas = []
+        lista_amistades_recibidas = []
+        for i in amistades_recibidas:
+            for j in amistades_enviadas:
+                if i.friend.username == j.creator_id.username:
+                    if j.friend.username == i.creator_id.username:
+                        if i.creator_id.username not in lista_amistades_reciprocas:
+                            lista_amistades_reciprocas.append(i.creator_id.username)
+                #print(lista_amistades_reciprocas)
+        for i in amistades_enviadas:
+            for j in amistades_recibidas:
+                if i.creator_id.username == j.creator_id.username:
+                    if i not in lista_amistades_reciprocas:
+                        lista_amistades_reciprocas.append(i.creator_id.username)
+                #print(lista_amistades_reciprocas)
+        for i in amistades_recibidas:
+            lista_amistades_recibidas.append(i.creator_id.username)
+        print(lista_amistades_reciprocas)
         if request.method == "POST":
             friend_form = FriendshipForm(request.POST)
             if friend_form.is_valid():
                 friend_form.save()
         else:
             friend_form = FriendshipForm()
-        return render(request, 'amistades.html', {"friend_form" : friend_form,})
+        return render(request, 'amistades.html', {
+            "friend_form" : friend_form,
+            "lista_amistades_enviadas":lista_amistades_enviadas,
+            "lista_amistades_recibidas":lista_amistades_recibidas,
+            "lista_amistades_reciprocas":lista_amistades_reciprocas
+            }
+        )
 
