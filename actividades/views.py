@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Actividades, Friendship
-from .forms import ActividadesForm, FriendshipForm
-
+from .forms import ActividadesForm, FriendRequestForm, FriendshipForm
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
@@ -43,8 +43,10 @@ def edit_act(request, id):
             form = ActividadesForm(instance=actividad)
         return render(request, 'edit_actividad.html', {'form':form})
 
-def amistades(request):
+def amistades(request,id):
     if request.user.is_authenticated:
+        creator_id = User.objects.get(id=id)
+        print(creator_id)
         user = request.user
         amistades_enviadas = Friendship.objects.filter(creator_id__username=user.username)  #OBJETOS AMISTAD CREADOS POR MI
         #print(f"enviadas por mi{[i.friend.username for i in amistades_enviadas]}") #this is okj
@@ -67,16 +69,23 @@ def amistades(request):
                         lista_amistades_reciprocas.append(i.creator_id.username)
                 #print(lista_amistades_reciprocas)
         for i in amistades_recibidas:
-            lista_amistades_recibidas.append(i.creator_id.username)
-        print(lista_amistades_reciprocas)
+            if i not in lista_amistades_reciprocas:
+                lista_amistades_recibidas.append(i.creator_id.username)
+        #print(lista_amistades_recibidas)
         if request.method == "POST":
             friend_form = FriendshipForm(request.POST)
+            friend_request_form = FriendRequestForm(request.POST)
             if friend_form.is_valid():
+                form = friend_form.save(commit=False)
+                form.creator_id = creator_id
                 friend_form.save()
+            elif friend_request_form.is_valid():
+                friend_request_form.save()
         else:
             friend_form = FriendshipForm()
+            friend_request_form = FriendRequestForm()
         return render(request, 'amistades.html', {
-            "friend_form" : friend_form,
+            "friend_form" : friend_form, "friend_request_form" : friend_request_form,
             "lista_amistades_enviadas":lista_amistades_enviadas,
             "lista_amistades_recibidas":lista_amistades_recibidas,
             "lista_amistades_reciprocas":lista_amistades_reciprocas
