@@ -24,11 +24,20 @@ class ActividadesForm(forms.ModelForm):
     duracion = forms.IntegerField(label='Duracion de Actividad',widget=forms.TextInput(attrs={'placeholder': 'Duracion de Actividad', 'style':'width: 80%; display: inline-block; max-width: 600px;', 'class': 'form-control'}))
 
 class FriendshipForm(forms.ModelForm):
+        #friend_list = User.objects.all()
+    #print(friend_list)
     class Meta:
         model = Friendship
-        fields = ("friends", "creator_id",)
-    friends = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
+        fields = ("friend",)
+        #friend = forms.ModelMultipleChoiceField(queryset=User.objects.all(),widget=forms.CheckboxSelectMultiple)
+        #friend = forms.MultipleChoiceField(choices=friend_list,
+        #                                   label="Amigos",
+        #                                   widget=forms.SelectMultiple)
+class FriendRequestForm(forms.ModelForm):
+    class Meta:
+        model = Friendship
+        fields = ("friend", "creator_id")
+    friend = forms.ModelMultipleChoiceField(queryset=Friendship.objects.all(),
                                            label="Amigos",
                                            widget=forms.CheckboxSelectMultiple)
     creator_id = forms.CharField()
-

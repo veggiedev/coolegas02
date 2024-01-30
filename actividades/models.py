@@ -14,5 +14,14 @@ class Friendship(models.Model):
     friend = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     creator_id = models.ForeignKey(User, related_name="Creador", on_delete=models.CASCADE)
-    
-
+    def recibidas(self):
+        list = []
+        for i in Friendship.objects.filter(friend__username == self.user__username):
+            list.append(i)
+        return list
+    def enviadas(self):
+        pass
+    def reciprocas(self):
+        pass
+    def __str__(self):
+        return f"{self.creator_id.username.capitalize()} added {self.friend.username.capitalize()}"
