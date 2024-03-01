@@ -1,39 +1,39 @@
 <!DOCTYPE>
 <html>
-
     {% extends 'base.html' %}
-    {% block title %} Coolegas-Actividades{% endblock %}
-{% block content %}
-<script src="https://cdn.tailwindcss.com"></script>
-
-    <body>
-        <h1 class="text-2xl text-center mt-16">Actividades a tu Alrededor</h1>
-
+    {% block title %}Coolegas-Actividades{% endblock %}
+    {% block content %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <body>
+            <h1 class="text-2xl text-center mt-16">Actividades a tu Alrededor</h1>
             <div class="grid grid-cols-2 gap-5 mx-5">
-
-            {% for activity in lista_actividades %}
-                <div>
-                    <br/>
-                    <img src="https://www.nps.gov/bisc/planyourvisit/images/IMG_2011_03_26_11_38_51_0334.jpg?maxwidth=650&autorotate=false&quality=78&format=webp"
-                    class="border-solid border-2 border-green-500 ">
-                    <strong>Actividad: </strong>{{ activity.nombre }}
-                    <br/>
-                    <strong>Participantes:<br/> </strong>{% for i in  activity.participantes.all %}
-                    <span class="">✔️{{ i.first_name }} {{ i.last_name }}</span><br/>
+                {% if lista_actividades %}
+                    {% for activity in lista_actividades %}
+                        <div>
+                            <br />
+                            <img src="https://www.nps.gov/bisc/planyourvisit/images/IMG_2011_03_26_11_38_51_0334.jpg?maxwidth=650&autorotate=false&quality=78&format=webp"
+                                 class="border-solid border-2 border-green-500 ">
+                            <strong>Actividad:</strong>{{ activity.nombre }}
+                            <br />
+                            <strong>Participantes:
+                                <br />
+                            </strong>
+                            {% for i in  activity.participantes.all %}
+                                <span>✔️{{ i.first_name }} {{ i.last_name }}</span>
+                                <br />
+                            {% endfor %}
+                            <strong>Lugar:</strong>{{ activity.lugar }}
+                            <br />
+                            <strong>Dia:</strong>{{ activity.fecha.date }}
+                            <br />
+                            <strong>Hora:</strong>{{ activity.fecha.time }}
+                            <br />
+                            <strong>Duracion:</strong>{{ activity.duracion }} horas
+                            <br />
+                        </div>
                     {% endfor %}
-                    <strong>Lugar: </strong>{{ activity.lugar }}
-                    <br/>
-                    <strong>Dia: </strong>{{ activity.fecha.date }}
-                    <br/>
-                    <strong>Hora: </strong>{{ activity.fecha.time }}
-                    <br/>
-                    <strong>Duracion: </strong>{{ activity.duracion }} horas
-                    <br/>
-                </div>
-            {% endfor %}
+                {% endif %}
             </div>
-
-    </body>
-{% endblock content %}
-
+        </body>
+    {% endblock content %}
 </html>
