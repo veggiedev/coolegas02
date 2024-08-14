@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-import dj_database_url
+#import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_tailwind',
     'django_browser_reload',
-    'whitenoise.runserver_nostatic',
+    #'whitenoise.runserver_nostatic',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -65,9 +65,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware,'
+    #'whitenoise.middleware.WhiteNoiseMiddleware,'
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'coolegas02.urls'
 
@@ -93,25 +93,25 @@ WSGI_APPLICATION = 'coolegas02.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django',
-        'PASSWORD': 'django',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
-
 #DATABASES = {
-            #'default': {
-            #'ENGINE': 'django.db.backends.sqlite3',
-            #'NAME': BASE_DIR / 'db.sqlite3',
-            #}
-            #}
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'django',
+        #'PASSWORD': 'django',
+        #'HOST': '127.0.0.1',
+        #'PORT': '5432',
+    #}
+#}
+
+#db_from_env = dj_database_url.config(conn_max_age=600)
+#DATABASES['default'].update(db_from_env)
+
+DATABASES = {
+            'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+            }
+            }
 
 
 # Password validation

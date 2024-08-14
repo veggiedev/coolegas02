@@ -16,9 +16,9 @@
 
         <nav class="bg-green-50 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-            <a href="{% url "index" %}" class="flex items-center">
+            <a href="{% url "index" %}" class="flex items-center" class="bg-gray-800">
                 <!--<img src="{% static "images/cool_logo.png" %}" class="opacity-50 h-6 mr-3 sm:h-9" alt="Logo" />-->
-                <h1 class="block py-2 pl-3 pr-4 text-white bg-green-700 text-3xl rounded md:bg-transparent md:text-green-700 md:p-0 border-green-700 border-b-2 dark:text-white"><strong>C<span class="text-white py--5"><span class="text-4xl">o</span><span class="">o</span><span class="md:text-green-700 sm:text-white">l</span>egas</strong></h1>
+                <h1 class="block py-2 pl-3 pr-4 text-white text-3xl rounded md:bg-transparent md:text-green-700 md:p-0 border-green-700 border-b-2 dark:text-white"><strong>C<span class="text-white py--5"><span class="text-4xl text-green-300">o</span><span class="text-green-300">o</span><span class="md:text-green-700 sm:text-white">l</span><span class="text-green-300">egas</strong></h1>
           </a>
           <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
@@ -65,8 +65,9 @@
         </div>
       </nav>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-      {% block content %}{% endblock %}
-
+      <body class="dark:bg-gray-300">
+        {% block content %}{% endblock %}
+      </body>
 </html>
 
 
